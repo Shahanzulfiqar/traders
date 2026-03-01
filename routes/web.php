@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\PasswordResetController;
 
 
 // Redirect homepage to login
@@ -22,3 +23,10 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name
 Route::redirect('/home', '/dashboard');
 
 //
+
+
+Route::get('/forgot-password', [PasswordResetController::class, 'create'])->name('password.request');
+Route::post('/forgot-password', [PasswordResetController::class, 'store'])->name('password.email');
+
+Route::get('/reset-password/{token}', [PasswordResetController::class, 'edit'])->name('password.reset');
+Route::post('/reset-password', [PasswordResetController::class, 'update'])->name('password.update');

@@ -47,12 +47,13 @@
                 <!-- Links -->
                 <p class="mt-3 text-center">
                     Need an account?
-                    <a data-bs-toggle="modal" data-bs-target="#sing_up" data-bs-dismiss="modal" href="#">Sign Up</a>
+                    <a href="{{ route('register') }}">Sign Up</a>
                 </p>
 
                 <div class="text-center">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#forgot_password" data-bs-dismiss="modal"
-                        class="pass_forget_btn">Forget Password?</a>
+                    <a href="{{ route('password.request') }}" class="pass_forget_btn">
+                        Forgot Password?
+                    </a>
                 </div>
             </form>
         </div>

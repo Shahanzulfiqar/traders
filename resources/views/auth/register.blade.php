@@ -62,13 +62,13 @@
                 <!-- Links -->
                 <p class="mt-3 text-center">
                     Already have an account?
-                    <a data-bs-toggle="modal" data-bs-target="#sing_up" data-bs-dismiss="modal" href="#">Log in</a>
+                    <a href="{{ route('login') }}">Log In</a>
                 </p>
 
                 <div class="text-center">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#forgot_password" data-bs-dismiss="modal"
-                        class="pass_forget_btn">Forget Password?</a>
-                </div>
+                    <a href="{{ route('password.request') }}" class="pass_forget_btn">
+                        Forgot Password?
+                    </a>
             </form>
         </div>
     </div>

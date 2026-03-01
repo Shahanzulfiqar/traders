@@ -19,7 +19,7 @@
     {{-- @include('layouts.sidebar') --}}
 
     {{-- Main Content --}}
-    <div class="main_content dashboard_part">
+    <div class="#">
 
         {{-- Navbar --}}
         {{-- @include('layouts.navbar') --}}
@@ -32,7 +32,7 @@
         </div>
 
         {{-- Footer --}}
-        @include('layouts.footer')
+        {{-- @include('layouts.footer') --}}
 
     </div>
 
