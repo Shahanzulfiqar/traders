@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordResetController;
+use App\Http\Controllers\ProfileController;
 
 
 // Redirect homepage to login
@@ -30,3 +31,12 @@ Route::post('/forgot-password', [PasswordResetController::class, 'store'])->name
 
 Route::get('/reset-password/{token}', [PasswordResetController::class, 'edit'])->name('password.reset');
 Route::post('/reset-password', [PasswordResetController::class, 'update'])->name('password.update');
+
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+});

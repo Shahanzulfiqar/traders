@@ -124,7 +124,9 @@
                                     <h5>Royal Traders</h5>
                                 </div>
                                 <div class="profile_info_details">
-                                    <a href="#">My Profile </a>
+                                    <a href="{{ route('profile.edit') }}">
+                                        Profile
+                                    </a>
                                     <a href="#">Settings</a>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
