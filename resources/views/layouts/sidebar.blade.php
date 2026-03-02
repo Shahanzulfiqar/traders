@@ -23,6 +23,27 @@
             </ul>
         </li>
         <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="{{ asset('img/menu-icon/6.svg') }}" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Inventory</span>
+                </div>
+            </a>
+            <ul>
+                <li>
+                    <a href="{{ route('manufacturers.index') }}">Manufacturers</a>
+                </li>
+                <li>
+                    <a href="{{ route('brands.index') }}">Brands</a>
+                </li>
+                <li>
+                    <a href="{{ route('products.index') }}">Products</a>
+                </li>
+            </ul>
+        </li>
+        <li class="">
             <a href="crypto_wallet.html" aria-expanded="false">
                 <div class="nav_icon_small">
                     <img src="img/menu-icon/2.svg" alt="">
@@ -62,22 +83,7 @@
                 </div>
             </a>
         </li>
-        <li class="">
-            <a class="has-arrow" href="#" aria-expanded="false">
-                <div class="nav_icon_small">
-                    <img src="img/menu-icon/6.svg" alt="">
-                </div>
-                <div class="nav_title">
-                    <span>Transactions</span>
-                </div>
-            </a>
-            <ul>
-                <li><a href="Request.html">Request</a></li>
-                <li><a href="tan_cancel.html">Cancel</a></li>
-                <li><a href="Refound.html">Refound</a></li>
-                <li><a href="Payment_details.html">Payment details</a></li>
-            </ul>
-        </li>
+
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">

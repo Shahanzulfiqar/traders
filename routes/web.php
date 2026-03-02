@@ -6,6 +6,9 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ManufacturerController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ProductController;
 
 
 // Redirect homepage to login
@@ -38,5 +41,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+});
+Route::resource('manufacturers', ManufacturerController::class);
+Route::resource('brands', BrandController::class);
+Route::resource('products', ProductController::class);
+
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::resource('manufacturers', ManufacturerController::class);
+    Route::resource('brands', BrandController::class);
+    Route::resource('products', ProductController::class);
 
 });
