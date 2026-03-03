@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Manufacturer;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
+
 
 class BrandController extends Controller
 {
@@ -69,4 +71,35 @@ class BrandController extends Controller
         return redirect()->route('brands.index')
             ->with('success', 'Brand deleted successfully.');
     }
+    public function data()
+{
+    $brands = Brand::with('manufacturer')->withCount('products');
+
+    return DataTables::of($brands)
+        ->addIndexColumn()
+        ->addColumn('manufacturer', function ($row) {
+            return $row->manufacturer->name ?? '-';
+        })
+        ->addColumn('total_products', function ($row) {
+            return $row->products_count;
+        })
+        ->addColumn('action', function ($row) {
+            $editUrl = route('brands.edit', $row->id);
+            $deleteUrl = route('brands.destroy', $row->id);
+
+            return '
+                <a href="'.$editUrl.'" class="btn btn-sm btn-info">Edit</a>
+                <form action="'.$deleteUrl.'" method="POST" style="display:inline;">
+                    '.csrf_field().'
+                    '.method_field("DELETE").'
+                    <button class="btn btn-sm btn-danger"
+                        onclick="return confirm(\'Delete this brand?\')">
+                        Delete
+                    </button>
+                </form>
+            ';
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+}
 }

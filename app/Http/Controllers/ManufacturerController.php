@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Manufacturer;
+use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 
 class ManufacturerController extends Controller
@@ -58,4 +59,58 @@ class ManufacturerController extends Controller
         return redirect()->route('manufacturers.index')
             ->with('success', 'Manufacturer deleted successfully.');
     }
+
+public function getData()
+{
+    $manufacturers = Manufacturer::withCount('brands')->select(['id', 'name']); // Eager load brand count
+
+    return DataTables::of($manufacturers)
+        ->addColumn('total_brands', function($row) {
+            return $row->brands_count;
+        })
+        ->addColumn('action', function($row) {
+            $edit = '<a href="'.route('manufacturers.edit', $row->id).'" class="btn btn-sm btn-info">Edit</a>';
+            $delete = '<form action="'.route('manufacturers.destroy', $row->id).'" method="POST" style="display:inline;">
+                        '.csrf_field().'
+                        '.method_field('DELETE').'
+                        <button class="btn btn-sm btn-danger" onclick="return confirm(\'Delete this manufacturer?\')">Delete</button>
+                       </form>';
+            return $edit . ' ' . $delete;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+}
+public function show($id)
+{
+    $manufacturer = Manufacturer::findOrFail($id);
+    return view('manufacturers.show', compact('manufacturer'));
+}
+public function data()
+{
+    $manufacturers = Manufacturer::withCount('brands');
+
+    return DataTables::of($manufacturers)
+        ->addIndexColumn()
+        ->addColumn('total_brands', function ($row) {
+            return $row->brands_count;
+        })
+        ->addColumn('action', function ($row) {
+            $editUrl = route('manufacturers.edit', $row->id);
+            $deleteUrl = route('manufacturers.destroy', $row->id);
+
+            return '
+                <a href="'.$editUrl.'" class="btn btn-sm btn-info">Edit</a>
+                <form action="'.$deleteUrl.'" method="POST" style="display:inline;">
+                    '.csrf_field().'
+                    '.method_field("DELETE").'
+                    <button class="btn btn-sm btn-danger"
+                        onclick="return confirm(\'Delete this manufacturer?\')">
+                        Delete
+                    </button>
+                </form>
+            ';
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+}
 }
