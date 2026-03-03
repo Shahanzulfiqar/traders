@@ -55,3 +55,4 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('products', ProductController::class);
 
 });
+Route::get('/manufacturers/data', [App\Http\Controllers\ManufacturerController::class, 'getData'])->name('manufacturers.data');

@@ -44,6 +44,20 @@
             </ul>
         </li>
         <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="img/menu-icon/17.svg" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Table</span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="data_table.html">Data Tables</a></li>
+                <li><a href="bootstrap_table.html">Bootstrap</a></li>
+            </ul>
+        </li>
+        <li class="">
             <a href="crypto_wallet.html" aria-expanded="false">
                 <div class="nav_icon_small">
                     <img src="img/menu-icon/2.svg" alt="">
@@ -249,20 +263,7 @@
                 <li><a href="profilebox.html">Profile Box</a></li>
             </ul>
         </li>
-        <li class="">
-            <a class="has-arrow" href="#" aria-expanded="false">
-                <div class="nav_icon_small">
-                    <img src="img/menu-icon/17.svg" alt="">
-                </div>
-                <div class="nav_title">
-                    <span>Table</span>
-                </div>
-            </a>
-            <ul>
-                <li><a href="data_table.html">Data Tables</a></li>
-                <li><a href="bootstrap_table.html">Bootstrap</a></li>
-            </ul>
-        </li>
+
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">
