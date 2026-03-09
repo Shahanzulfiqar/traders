@@ -13,10 +13,10 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $user = auth()->user();
-        $roles = $user->getRoleNames();
-        $permissions = $user->getAllPermissions();
-        dd($permissions);
+        // $user = auth()->user();
+        // $roles = $user->getRoleNames();
+        // $permissions = $user->getAllPermissions();
+        // dd($permissions);
         return view('dashboard');
     }
 }

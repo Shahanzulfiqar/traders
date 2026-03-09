@@ -14,10 +14,6 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolePermissionController;
 
-Route::resource('menus', MenuController::class);
-
-Route::resource('roles', RoleController::class);
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,14 +21,11 @@ Route::resource('roles', RoleController::class);
 */
 
 // Redirect homepage to login
-Route::get('/', function () {
-    return redirect('/login');
-});
+Route::get('/', fn() => redirect('/login'));
 
 // Authentication Routes
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
-
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 Route::get('/forgot-password', [PasswordResetController::class, 'create'])->name('password.request');
@@ -41,9 +34,14 @@ Route::post('/forgot-password', [PasswordResetController::class, 'store'])->name
 Route::get('/reset-password/{token}', [PasswordResetController::class, 'edit'])->name('password.reset');
 Route::post('/reset-password', [PasswordResetController::class, 'update'])->name('password.update');
 
+// Redirect /home to dashboard
 Route::redirect('/home', '/dashboard');
 
-// Protected Routes
+/*
+|--------------------------------------------------------------------------
+| Protected Routes (Auth)
+|--------------------------------------------------------------------------
+*/
 Route::middleware(['auth'])->group(function () {
 
     // Dashboard
@@ -54,35 +52,42 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     /*
-    |--------------------------------------------------------------------------
-    | Manufacturers AJAX Route (IMPORTANT: BEFORE resource)
-    |--------------------------------------------------------------------------
+    |----------------------------------------------------------------------
+    | Manufacturers, Brands, Products
+    |----------------------------------------------------------------------
     */
-    Route::get('manufacturers/data', [ManufacturerController::class, 'data'])
-        ->name('manufacturers.data');
-        Route::get('brands/data', [BrandController::class, 'data'])
-    ->name('brands.data');
+    Route::get('manufacturers/data', [ManufacturerController::class, 'data'])->name('manufacturers.data');
+    Route::get('brands/data', [BrandController::class, 'data'])->name('brands.data');
+    Route::get('products/data', [ProductController::class, 'data'])->name('products.data');
 
-    Route::get('products/data', [ProductController::class, 'data'])
-    ->name('products.data');
-
-    /*
-    |--------------------------------------------------------------------------
-    | Resource Routes
-    |--------------------------------------------------------------------------
-    */
     Route::resource('manufacturers', ManufacturerController::class);
     Route::resource('brands', BrandController::class);
     Route::resource('products', ProductController::class);
+
+    /*
+    |----------------------------------------------------------------------
+    | Menus & Roles
+    |----------------------------------------------------------------------
+    */
+    Route::resource('menus', MenuController::class);
+    Route::resource('roles', RoleController::class);
+
+    /*
+    |----------------------------------------------------------------------
+    | Role Permissions
+    |----------------------------------------------------------------------
+    */
+    Route::prefix('role-permissions')->group(function () {
+        Route::get('/', [RolePermissionController::class, 'index'])->name('rolepermissions.index'); // for sidebar link
+        Route::post('/store', [RolePermissionController::class, 'store'])->name('role.permissions.store'); // form submission
+    });
+
+    /*
+    |----------------------------------------------------------------------
+    | Users
+    |----------------------------------------------------------------------
+    */
+    Route::resource('users', UserController::class);
 });
-Route::get('/role-permissions', [RolePermissionController::class,'index'])->name('role.permissions');
-Route::post('/role-permissions', [RolePermissionController::class,'store'])->name('role.permissions.store');
 
 
-Route::resource('users', UserController::class);
-
-
-Route::group(['middleware' => ['auth']], function() {
-    Route::get('role-permissions', [RolePermissionController::class, 'index'])
-        ->name('rolepermissions.index'); // <- this name must match the blade
-});
