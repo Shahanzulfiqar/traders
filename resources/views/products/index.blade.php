@@ -37,41 +37,38 @@
 @endsection
 
 @push('js')
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-
     <script>
         $(document).ready(function() {
-
-            $('#productsTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('products.data') }}",
-                columns: [{
-                        data: 'DT_RowIndex',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        data: 'brand',
-                        name: 'brand'
-                    },
-                    {
-                        data: 'manufacturer',
-                        name: 'manufacturer'
-                    },
-                    {
-                        data: 'action',
-                        orderable: false,
-                        searchable: false
-                    }
-                ]
-            });
-
+            if (!$.fn.DataTable.isDataTable('#productsTable')) {
+                $('#productsTable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('products.data') }}",
+                    columns: [{
+                            data: 'DT_RowIndex',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'name',
+                            name: 'name'
+                        },
+                        {
+                            data: 'brand',
+                            name: 'brand'
+                        },
+                        {
+                            data: 'manufacturer',
+                            name: 'manufacturer'
+                        },
+                        {
+                            data: 'action',
+                            orderable: false,
+                            searchable: false
+                        }
+                    ]
+                });
+            }
         });
     </script>
 @endpush

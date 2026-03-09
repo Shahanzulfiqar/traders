@@ -14,7 +14,7 @@
 <script src="{{ asset('vendors/apex_chart/apex_dashboard.js') }}"></script>
 
 {{-- Theme JS --}}
-<script src="{{ asset('js/dashboard_init.js') }}"></script>
+{{-- <script src="{{ asset('js/dashboard_init.js') }}"></script> --}}
 <script src="{{ asset('js/custom.js') }}"></script>
 
 {{-- Safe ApexCharts Initialization --}}

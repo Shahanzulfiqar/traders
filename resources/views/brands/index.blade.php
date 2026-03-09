@@ -37,40 +37,38 @@
 @endsection
 
 @push('js')
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-
     <script>
         $(document).ready(function() {
 
-            $('#brandsTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('brands.data') }}",
-                columns: [{
-                        data: 'DT_RowIndex',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        data: 'manufacturer',
-                        name: 'manufacturer'
-                    },
-                    {
-                        data: 'total_products',
-                        name: 'total_products'
-                    },
-                    {
-                        data: 'action',
-                        orderable: false,
-                        searchable: false
-                    }
-                ]
-            });
+            if (!$.fn.DataTable.isDataTable('#brandsTable')) {
+
+                $('#brandsTable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('brands.data') }}",
+                    columns: [{
+                            data: 'DT_RowIndex',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'name'
+                        },
+                        {
+                            data: 'manufacturer'
+                        },
+                        {
+                            data: 'total_products'
+                        },
+                        {
+                            data: 'action',
+                            orderable: false,
+                            searchable: false
+                        }
+                    ]
+                });
+
+            }
 
         });
     </script>

@@ -9,6 +9,14 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RolePermissionController;
+
+Route::resource('menus', MenuController::class);
+
+Route::resource('roles', RoleController::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -66,4 +74,15 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('manufacturers', ManufacturerController::class);
     Route::resource('brands', BrandController::class);
     Route::resource('products', ProductController::class);
+});
+Route::get('/role-permissions', [RolePermissionController::class,'index'])->name('role.permissions');
+Route::post('/role-permissions', [RolePermissionController::class,'store'])->name('role.permissions.store');
+
+
+Route::resource('users', UserController::class);
+
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('role-permissions', [RolePermissionController::class, 'index'])
+        ->name('rolepermissions.index'); // <- this name must match the blade
 });

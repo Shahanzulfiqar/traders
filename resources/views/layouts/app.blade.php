@@ -19,20 +19,15 @@
     @include('layouts.sidebar')
 
     {{-- Main Content --}}
-    <div class="">
+    {{-- <div class=""> --}}
 
-        {{-- Navbar --}}
-        @include('layouts.navbar')
+    {{-- Navbar --}}
+    @include('layouts.navbar')
 
-        {{-- Page Content --}}
-        <div class="main_content_iner">
-            <div class="container-fluid p-0">
-                @yield('content')
-            </div>
-        </div>
+    @yield('content')
 
-        {{-- Footer --}}
-        @include('layouts.footer')
+    {{-- Footer --}}
+    @include('layouts.footer')
 
     </div>
 

@@ -46,6 +46,50 @@
         <li class="">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="nav_icon_small">
+                    <img src="img/menu-icon/General.svg" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Roles & Permissions</span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="{{ route('roles.index') }}">Roles</a></li>
+                <li><a href="{{ route('rolepermissions.index') }}">Role Permissions</a></li>
+            </ul>
+        </li>
+        <li class="">
+            <a class="has-arrow" href="{{ route('menus.index') }}" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="img/menu-icon/General.svg" alt="">
+                </div>
+                <div class="nav_title">
+                    <span href="{{ route('menus.index') }}">Menus</span>
+                </div>
+            </a>
+            <ul>
+                {{-- <li><a href="{{ route('menus.index') }}">Menus</a></li> --}}
+                {{-- <li><a href="{{ route('rolepermissions.index') }}">Role Permissions</a></li> --}}
+            </ul>
+        </li>
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
+                    <img src="img/menu-icon/General.svg" alt="">
+                </div>
+                <div class="nav_title">
+                    <span>Users</span>
+                </div>
+            </a>
+            <ul>
+                <li><a href="{{ route('users.index') }}">Users</a></li>
+                <li><a href="{{ route('users.create') }}">Create User</a></li>
+                {{-- <li><a href="{{ route('users.edit') }}">Edit User</a></li> --}}
+                {{-- <li><a href="{{ route('rolepermissions.index') }}">Role Permissions</a></li> --}}
+            </ul>
+        </li>
+        <li class="">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="nav_icon_small">
                     <img src="img/menu-icon/17.svg" alt="">
                 </div>
                 <div class="nav_title">

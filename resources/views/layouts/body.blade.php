@@ -1,4 +1,4 @@
- <div class="main_content_iner overly_inner ">
+ {{-- <div class="main_content_iner overly_inner ">
      <div class="container-fluid p-0 ">
          <!-- page title  -->
          <div class="row">
@@ -745,4 +745,4 @@
              </div>
          </div>
      </div>
- </div>
+ </div> --}}

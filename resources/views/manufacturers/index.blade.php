@@ -37,42 +37,34 @@
 
 
 @push('js')
-    <!-- jQuery -->
-
-
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-
     <script>
         $(document).ready(function() {
-
-            $('#manufacturersTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('manufacturers.data') }}",
-                columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        data: 'total_brands',
-                        name: 'total_brands'
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false
-                    }
-                ]
-            });
-
+            if (!$.fn.DataTable.isDataTable('#manufacturersTable')) {
+                $('#manufacturersTable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('manufacturers.data') }}",
+                    columns: [{
+                            data: 'DT_RowIndex',
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: 'name',
+                            name: 'name'
+                        },
+                        {
+                            data: 'total_brands',
+                            name: 'total_brands'
+                        },
+                        {
+                            data: 'action',
+                            orderable: false,
+                            searchable: false
+                        }
+                    ]
+                });
+            }
         });
     </script>
 @endpush
