@@ -80,6 +80,9 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('role-permissions')->group(function () {
         Route::get('/', [RolePermissionController::class, 'index'])->name('rolepermissions.index'); // for sidebar link
         Route::post('/store', [RolePermissionController::class, 'store'])->name('role.permissions.store'); // form submission
+
+
+        Route::get('/role-permissions/get', [RolePermissionController::class, 'getPermissions'])->name('role.permissions.get');
     });
 
     /*

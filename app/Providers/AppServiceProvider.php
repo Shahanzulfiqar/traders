@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Services\MenuService;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        View::composer('*', function ($view) {
+
+            if (auth()->check()) {
+                $menus = MenuService::getUserMenus(auth()->user());
+                $view->with('sidebarMenus', $menus);
+            }
+
+        });
     }
 }
