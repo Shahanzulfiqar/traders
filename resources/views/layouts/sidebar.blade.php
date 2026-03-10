@@ -1,59 +1,51 @@
 <nav class="sidebar dark_sidebar">
 
-<ul id="sidebar_menu">
+    <ul id="sidebar_menu">
 
-@foreach($sidebarMenus as $menu)
+        @foreach ($sidebarMenus as $menu)
+            <li>
 
-<li>
+                @if ($menu->children->count())
+                    <a class="has-arrow" href="#" aria-expanded="false">
 
-@if($menu->children->count())
+                        <div class="nav_icon_small">
+                            <img src="{{ asset($menu->icon) }}" alt="">
+                        </div>
 
-<a class="has-arrow" href="#" aria-expanded="false">
+                        <div class="nav_title">
+                            <span>{{ $menu->name }}</span>
+                        </div>
 
-<div class="nav_icon_small">
-<img src="{{ asset($menu->icon) }}" alt="">
-</div>
+                    </a>
 
-<div class="nav_title">
-<span>{{ $menu->name }}</span>
-</div>
+                    <ul>
 
-</a>
+                        @foreach ($menu->children as $child)
+                            <li>
+                                <a href="{{ route($child->route) }}">
+                                    {{ $child->name }}
+                                </a>
+                            </li>
+                        @endforeach
 
-<ul>
+                    </ul>
+                @else
+                    <a href="{{ route($menu->route) }}">
 
-@foreach($menu->children as $child)
+                        <div class="nav_icon_small">
+                            <img src="{{ asset($menu->icon) }}" alt="">
+                        </div>
 
-<li>
-<a href="{{ route($child->route) }}">
-{{ $child->name }}
-</a>
-</li>
+                        <div class="nav_title">
+                            <span>{{ $menu->name }}</span>
+                        </div>
 
-@endforeach
+                    </a>
+                @endif
 
-</ul>
+            </li>
+        @endforeach
 
-@else
-
-<a href="{{ route($menu->route) }}">
-
-<div class="nav_icon_small">
-<img src="{{ asset($menu->icon) }}" alt="">
-</div>
-
-<div class="nav_title">
-<span>{{ $menu->name }}</span>
-</div>
-
-</a>
-
-@endif
-
-</li>
-
-@endforeach
-
-</ul>
+    </ul>
 
 </nav>
