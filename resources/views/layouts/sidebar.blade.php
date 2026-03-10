@@ -6,49 +6,59 @@
 
 <li>
 
-@if($menu->children->count())
+    {{-- Parent Menu With Children --}}
+    @if($menu->children && $menu->children->count())
 
-<a class="has-arrow" href="#" aria-expanded="false">
+        <a class="has-arrow" href="#" aria-expanded="false">
 
-<div class="nav_icon_small">
-<img src="{{ asset($menu->icon) }}" alt="">
-</div>
+            <div class="nav_icon_small">
+                @if($menu->icon)
+                    <img src="{{ asset($menu->icon) }}" alt="">
+                @endif
+            </div>
 
-<div class="nav_title">
-<span>{{ $menu->name }}</span>
-</div>
+            <div class="nav_title">
+                <span>{{ $menu->name }}</span>
+            </div>
 
-</a>
+        </a>
 
-<ul>
+        <ul>
 
-@foreach($menu->children as $child)
+            @foreach($menu->children as $child)
 
-<li>
-<a href="{{ route($child->route) }}">
-{{ $child->name }}
-</a>
-</li>
+                <li>
 
-@endforeach
+                    <a href="{{ $child->route && Route::has($child->route) ? route($child->route) : '#' }}">
 
-</ul>
+                        {{ $child->name }}
 
-@else
+                    </a>
 
-<a href="{{ route($menu->route) }}">
+                </li>
 
-<div class="nav_icon_small">
-<img src="{{ asset($menu->icon) }}" alt="">
-</div>
+            @endforeach
 
-<div class="nav_title">
-<span>{{ $menu->name }}</span>
-</div>
+        </ul>
 
-</a>
+    {{-- Single Menu --}}
+    @else
 
-@endif
+        <a href="{{ $menu->route && Route::has($menu->route) ? route($menu->route) : '#' }}">
+
+            <div class="nav_icon_small">
+                @if($menu->icon)
+                    <img src="{{ asset($menu->icon) }}" alt="">
+                @endif
+            </div>
+
+            <div class="nav_title">
+                <span>{{ $menu->name }}</span>
+            </div>
+
+        </a>
+
+    @endif
 
 </li>
 
