@@ -115,8 +115,8 @@
                                 <img src="img/transfer/4.png" alt="#">
                             </div>
                             <div class="author_name">
-                                <h4 class="f_s_15 f_w_500 mb-0">Shahan Zulfiqar</h4>
-                                <p class="f_s_12 f_w_400">Managing Director</p>
+                                <h4 class="f_s_15 f_w_500 mb-0">{{ auth()->user()->name }}</h4>
+                                {{-- {{ auth()->user()->role->name ?? 'No Role' }} --}}
                             </div>
                             <div class="profile_info_iner">
                                 <div class="profile_author_name">

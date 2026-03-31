@@ -85,6 +85,7 @@ public function show($id)
     $manufacturer = Manufacturer::findOrFail($id);
     return view('manufacturers.show', compact('manufacturer'));
 }
+
 public function data()
 {
     $manufacturers = Manufacturer::withCount('brands');
