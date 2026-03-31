@@ -8,9 +8,11 @@
         <div class="white_card_header">
             <div class="box_header m-0 d-flex justify-content-between align-items-center">
                 <h3 class="m-0">Manufacturers</h3>
+                @if($can_add)
                 <a href="{{ route('manufacturers.create') }}" class="btn btn-primary">
                     Add Manufacturer
                 </a>
+                @endif
             </div>
         </div>
 
